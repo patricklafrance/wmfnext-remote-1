@@ -1,0 +1,54 @@
+{
+  "name": "wmfnext-remote-1",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Patrick Lafrance",
+  "license": "Apache-2.0",
+  "repository": "",
+  "type": "module",
+  "engines": {
+    "node": ">=19"
+  },
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "webpack --config webpack.prod.cjs",
+    "clean": "run-p -c delete-dist delete-ts-cache",
+    "dev": "webpack serve --config webpack.dev.cjs",
+    "delete-dist": "rimraf dist",
+    "delete-node-modules": "rimraf node_modules",
+    "delete-ts-cache": "rimraf *.tsbuildinfo",
+    "delete-yarn-lock": "rimraf yarn.lock",
+    "eslint": "eslint --ext .js,.ts packages --max-warnings=-1",
+    "eslint-fix": "eslint --ext .js,.ts . --fix",
+    "lint": "eslint && check-types",
+    "release": "",
+    "reset": "run-s -c clean delete-node-modules delete-yarn-lock"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.4.5"
+  },
+  "devDependencies": {
+    "@sharegate/eslint-config-react": "5.0.0",
+    "@sharegate/eslint-config-recommended": "3.0.0",
+    "@sharegate/eslint-config-typescript": "4.0.0",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "@types/react-router-dom": "5.3.3",
+    "@types/webpack": "5.28.0",
+    "@typescript-eslint/parser": "5.46.1",
+    "cross-env": "7.0.3",
+    "css-loader": "6.7.3",
+    "eslint": "8.29.0",
+    "html-webpack-plugin": "5.5.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "style-loader": "3.3.1",
+    "ts-loader": "9.4.2",
+    "typescript": "4.9.4",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1"
+  }
+}
