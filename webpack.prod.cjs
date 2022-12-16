@@ -1,4 +1,6 @@
 const path = require("path");
+const packageDependencies = require("./package.json").dependencies;
+const wmfConfig = require("./webpack.wmf.cjs");
 
 module.exports = {
     mode: "production",
@@ -8,6 +10,7 @@ module.exports = {
     optimization: {
         minimize: true
     },
+    entry: "./src/register.tsx",
     output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "http://localhost:8081/",
@@ -38,5 +41,8 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".ts", ".tsx", ".css"]
-    }
+    },
+    plugins: [
+        wmfConfig(packageDependencies)
+    ]
 };

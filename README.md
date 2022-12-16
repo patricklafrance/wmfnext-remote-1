@@ -1,5 +1,7 @@
 # wmfnext-remote-1
 
+Remote application for [wmfnext-host](https://github.com/patricklafrance/wmfnext-host).
+
 ## Installation
 
 This project use Yarn, to install Yarn:
@@ -18,7 +20,7 @@ yarn install
 
 ## Start developing
 
-To start developing, [open a terminal in VSCode](https://code.visualstudio.com/docs/editor/integrated-terminal#_managing-multiple-terminals) and execute the following command at the root of the workspace:
+[Open a terminal in VSCode](https://code.visualstudio.com/docs/editor/integrated-terminal#_managing-multiple-terminals) and execute the following command:
 
 ```bash
 yarn dev

@@ -4,7 +4,7 @@
   "private": true,
   "author": "Patrick Lafrance",
   "license": "Apache-2.0",
-  "repository": "",
+  "repository": "https://github.com/patricklafrance/wmfnext-remote-1.git",
   "type": "module",
   "engines": {
     "node": ">=19"
@@ -13,7 +13,7 @@
     "prebuild": "yarn clean",
     "build": "webpack --config webpack.prod.cjs",
     "clean": "run-p -c delete-dist delete-ts-cache",
-    "dev": "webpack serve --config webpack.dev.cjs",
+    "dev": "cross-env LOCAL=true webpack serve --config webpack.dev.cjs",
     "delete-dist": "rimraf dist",
     "delete-node-modules": "rimraf node_modules",
     "delete-ts-cache": "rimraf *.tsbuildinfo",
@@ -22,7 +22,10 @@
     "eslint-fix": "eslint --ext .js,.ts . --fix",
     "lint": "eslint && check-types",
     "release": "",
-    "reset": "run-s -c clean delete-node-modules delete-yarn-lock"
+    "reset": "run-s -c clean delete-node-modules delete-yarn-lock",
+    "serve-build": "run-s build serve-build:start-server",
+    "serve-build:start-server": "yarn http-server dist -p 8081 -P http://localhost:8081?",
+    "serve-dev": "webpack serve --config webpack.dev.cjs"
   },
   "dependencies": {
     "react": "18.2.0",
@@ -42,6 +45,7 @@
     "css-loader": "6.7.3",
     "eslint": "8.29.0",
     "html-webpack-plugin": "5.5.0",
+    "http-server": "14.1.1",
     "npm-run-all": "4.1.5",
     "rimraf": "3.0.2",
     "style-loader": "3.3.1",
