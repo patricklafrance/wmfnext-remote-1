@@ -1,5 +1,5 @@
 export function App() {
     return (
-        <div>Hello from App!!!!!!</div>
+        <div>Hello from remote!</div>
     );
 }

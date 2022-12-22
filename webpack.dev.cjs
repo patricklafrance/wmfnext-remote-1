@@ -18,7 +18,7 @@ module.exports = {
             "Access-Control-Allow-Origin": "*"
         }
     },
-    entry: isLocalDevelopment ? "./src/index.tsx" : "./src/register.tsx",
+    entry: isLocalDevelopment ? "./src/index.ts" : "./src/register.tsx",
     output: {
         // The trailing / is important otherwise hot reload doesn't work.
         publicPath: "http://localhost:8081/"
@@ -45,7 +45,6 @@ module.exports = {
             },
             {
                 test: /\.(css)$/,
-                exclude: /node_modules/,
                 use: ["style-loader", "css-loader"]
             },
             {

@@ -10,7 +10,7 @@ module.exports = {
     optimization: {
         minimize: true
     },
-    entry: "./src/register.tsx",
+    entry: "./src/register.ts",
     output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "http://localhost:8081/",
@@ -37,7 +37,6 @@ module.exports = {
             },
             {
                 test: /\.(css)$/,
-                exclude: /node_modules/,
                 use: ["style-loader", "css-loader"]
             },
             {

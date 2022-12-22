@@ -1,7 +1,5 @@
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-const RemoteModulePlugin = require("wmfnext-remote-loader/dist");
-
 // TODO: once the shell is developed, we might want to wrap this plugin in a custom plugin like FederatedModulePlugin
 // to establish our conventions.
 // Conventions will be:
@@ -28,6 +26,10 @@ module.exports = function(packageDependencies) {
             "react-router-dom": {
                 singleton: true,
                 requiredVersion: packageDependencies["react-router-dom"]
+            },
+            "wmfnext-shell": {
+                singleton: true,
+                requiredVersion: "0.0.1"
             }
         }
     });
