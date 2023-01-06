@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json.schemastore.org/package",
   "name": "wmfnext-remote-1",
   "version": "0.0.0",
   "private": true,
@@ -11,9 +12,9 @@
   },
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "webpack --config webpack.prod.cjs",
+    "build": "webpack --config webpack.prod.js",
     "clean": "run-p -c delete-dist delete-ts-cache",
-    "dev": "cross-env LOCAL=true webpack serve --config webpack.dev.cjs",
+    "dev": "cross-env LOCAL=true webpack serve --config webpack.dev.js",
     "delete-dist": "rimraf dist",
     "delete-node-modules": "rimraf node_modules",
     "delete-ts-cache": "rimraf *.tsbuildinfo",
@@ -21,14 +22,20 @@
     "eslint": "eslint --ext .js,.ts packages --max-warnings=-1",
     "eslint-fix": "eslint --ext .js,.ts . --fix",
     "lint": "eslint && check-types",
+    "link": "run-p link:*",
     "link:shell": "yarn link wmfnext-shell",
     "link:remote-loader": "yarn link wmfnext-remote-loader",
-    "preinstall": "yarn link:shell && yarn link:remote-loader",
-    "release": "yarn link:shell",
+    "preinstall": "yarn link",
+    "release": "",
     "reset": "run-s -c clean delete-node-modules delete-yarn-lock",
     "serve-build": "run-s build serve-build:start-server",
     "serve-build:start-server": "yarn http-server dist -p 8081 -P http://localhost:8081?",
-    "serve-dev": "webpack serve --config webpack.dev.cjs"
+    "serve-dev": "webpack serve --config webpack.dev.js"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.4.5"
   },
   "devDependencies": {
     "@sharegate/eslint-config-react": "5.0.1",

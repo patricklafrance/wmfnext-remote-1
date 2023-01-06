@@ -1,8 +1,15 @@
-const path = require("path");
-const packageDependencies = require("./package.json").devDependencies;
-const wmfConfig = require("./webpack.wmf.cjs");
+import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
+import { createRemoteConfiguration } from "wmfnext-remote-loader/createModuleFederationConfiguration.js";
+import path from "path";
+import url from "url";
+import packageJson from "./package.json" assert { type: "json" };
 
-module.exports = {
+// "__dirname" is specific to CommonJS: https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/** @type {import("webpack").Configuration} */
+export default {
     mode: "production",
     target: "web",
     cache: false,
@@ -10,7 +17,7 @@ module.exports = {
     optimization: {
         minimize: true
     },
-    entry: "./src/register.ts",
+    entry: "./src/register.tsx",
     output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "http://localhost:8081/",
@@ -49,6 +56,19 @@ module.exports = {
         extensions: [".js", ".ts", ".tsx", ".css"]
     },
     plugins: [
-        wmfConfig(packageDependencies)
+        new ModuleFederationPlugin(
+            createRemoteConfiguration(
+                "remote1",
+                packageJson,
+                {
+                    sharedDependencies: {
+                        "wmfnext-shell": {
+                            singleton: true,
+                            requiredVersion: "0.0.1"
+                        }
+                    }
+                }
+            )
+        )
     ]
 };

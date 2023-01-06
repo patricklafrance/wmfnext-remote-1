@@ -1,9 +1,9 @@
-import { useRuntime } from "wmfnext-shell";
+import { useLogger } from "wmfnext-shell";
 
 export function Page2() {
-    const runtime = useRuntime();
+    const logger = useLogger();
 
-    runtime.logDebug("Rendering \"page2\" from module \"remote1\"");
+    logger.debug("Rendering \"page2\" from module \"remote1\"");
 
     return (
         <main>
