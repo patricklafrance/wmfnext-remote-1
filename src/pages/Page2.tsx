@@ -8,7 +8,7 @@ export function Page2() {
     return (
         <main>
             <h1>Page 2</h1>
-            <p>From remote1</p>
+            <p>From remote-1</p>
         </main>
     );
 }

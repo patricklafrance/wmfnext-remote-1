@@ -16,4 +16,19 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
             element: <Page3 />
         }
     ]);
+
+    runtime.registerNavigationItems([
+        {
+            to: "remote1/page-1",
+            content: "Remote1/Page 1"
+        },
+        {
+            to: "remote1/page-2",
+            content: "Remote1/Page 2"
+        },
+        {
+            to: "remote1/page-3",
+            content: "Remote1/Page 3"
+        }
+    ]);
 };
