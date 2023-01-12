@@ -1,5 +1,10 @@
 import type { ModuleRegisterFunction, Runtime } from "wmfnext-shell";
-import { Page1, Page2, Page3 } from "./pages";
+
+import { lazy } from "react";
+
+const Page1 = lazy(() => import("./pages/Page1"));
+const Page2 = lazy(() => import("./pages/Page2"));
+const Page3 = lazy(() => import("./pages/Page3"));
 
 export const register: ModuleRegisterFunction = (runtime: Runtime) => {
     runtime.registerRoutes([
