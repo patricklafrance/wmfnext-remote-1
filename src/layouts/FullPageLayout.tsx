@@ -1,9 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
-export function FullPageLayout() {
+export default function FullPageLayout() {
     return (
-        <div>
-            <Outlet />
-        </div>
+        <>
+            <h1>Custom full page layout from remote-1</h1>
+            <div>
+                <Link to="/">Go back</Link>
+            </div>
+            <div>
+                <Outlet />
+            </div>
+        </>
     );
 }
