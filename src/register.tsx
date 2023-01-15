@@ -1,5 +1,6 @@
 import type { ModuleRegisterFunction, Runtime } from "wmfnext-shell";
 
+import { ErrorBoundary } from "./ErrorBoundary";
 import { lazy } from "react";
 
 const FullLayout = lazy(() => import("./layouts/FullPageLayout"));
@@ -19,6 +20,7 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
             hoist: true,
             path: "remote1/page-2",
             element: <FullLayout />,
+            errorElement: <ErrorBoundary />,
             children: [
                 {
                     element: <Page2 />
@@ -32,7 +34,8 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
         {
             hoist: true,
             path: "remote1/page-4",
-            element: <Page4 />
+            element: <Page4 />,
+            errorElement: <ErrorBoundary />
         }
     ]);
 
@@ -43,7 +46,7 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
         },
         {
             to: "remote1/page-2",
-            content: "Remote1/Page 2 - Override layout"
+            content: "Remote1/Page 2 - Overrided layout"
         },
         {
             to: "remote1/page-3",
