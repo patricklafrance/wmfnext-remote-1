@@ -1,6 +1,6 @@
 import { useLogger, useSession } from "wmfnext-shell";
 
-import { AppSession } from "wmfnext-typings";
+import { AppSession } from "wmfnext-shared";
 
 export default function Page5() {
     const logger = useLogger();
