@@ -10,8 +10,8 @@ const Page2 = lazy(() => import("./pages/Page2"));
 const Page3 = lazy(() => import("./pages/Page3"));
 const Page4 = lazy(() => import("./pages/Page4"));
 const Page5 = lazy(() => import("./pages/Page5"));
-const Page6 = lazy(() => import("./pages/Page6"));
-const Page7 = lazy(() => import("./pages/Page7"));
+const Page6 = lazy(() => import("./pages/Page7"));
+const Page7 = lazy(() => import("./pages/Page6"));
 
 export const register: ModuleRegisterFunction = (runtime: Runtime) => {
     runtime.registerRoutes([
