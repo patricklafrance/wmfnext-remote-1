@@ -4,7 +4,7 @@ import { AppSession } from "wmfnext-shared";
 
 export default function Page5() {
     const logger = useLogger();
-    const session = useSession<AppSession>();
+    const session = useSession() as AppSession;
 
     logger.debug("Rendering \"page5\" from module \"remote1\"");
 
