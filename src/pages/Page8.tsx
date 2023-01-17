@@ -1,15 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { useLogger } from "wmfnext-shell";
 
-export async function loader() {
-    return fetch("https://rickandmortyapi.com/api/character/1,2,3,4,5", {
-        method: "GET",
-        headers: {
-            "Accept": "application/json"
-        }
-    });
-}
-
 interface Character {
     id: number;
     name: string;

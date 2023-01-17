@@ -2,7 +2,6 @@ import type { ModuleRegisterFunction, Runtime } from "wmfnext-shell";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 import { lazy } from "react";
-import { loader as page8Loader } from "./pages/Page8";
 
 const FullLayout = lazy(() => import("./layouts/FullPageLayout"));
 
@@ -57,7 +56,14 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
         {
             path: "remote1/page-8",
             element: <Page8 />,
-            loader: page8Loader
+            loader: async function loader() {
+                return fetch("https://rickandmortyapi.com/api/character/1,2,3,4,5", {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+            }
         }
     ]);
 
@@ -84,11 +90,11 @@ export const register: ModuleRegisterFunction = (runtime: Runtime) => {
         },
         {
             to: "remote1/page-6",
-            content: "Remote1/Page 6 - Shared custom service"
+            content: "Remote1/Page 6 - Using the event bus"
         },
         {
             to: "remote1/page-7",
-            content: "Remote1/Page 7 - Using the event bus"
+            content: "Remote1/Page 7 - Shared custom service"
         },
         {
             to: "remote1/page-8",
