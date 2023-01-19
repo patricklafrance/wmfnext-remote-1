@@ -1,9 +1,9 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
-// import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
-// import { createModuleConfiguration } from "wmfnext-shared/createModuleFederationConfiguration.js";
+import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
+import { createModuleConfiguration } from "wmfnext-shared/createModuleFederationConfiguration.js";
 import path from "path";
 import url from "url";
-// import packageJson from "./package.json" assert { type: "json" };
+import packageJson from "./package.json" assert { type: "json" };
 
 // "__dirname" is specific to CommonJS: https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 const __filename = url.fileURLToPath(import.meta.url);
@@ -71,9 +71,9 @@ export default {
         extensions: [".js", ".ts", ".tsx", ".css"]
     },
     plugins: [
-        // !isLocal && new ModuleFederationPlugin(
-        //     createModuleConfiguration("remote1", packageJson)
-        // ),
+        !isLocal && new ModuleFederationPlugin(
+            createModuleConfiguration("remote1", packageJson)
+        ),
         isLocal && new HtmlWebpackPlugin({
             template: "./public/index.html"
         })
