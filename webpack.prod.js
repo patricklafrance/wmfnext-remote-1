@@ -1,5 +1,5 @@
 import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
-import { createRemoteConfiguration } from "wmfnext-remote-loader/createModuleFederationConfiguration.js";
+import { createModuleConfiguration } from "wmfnext-shared/createModuleFederationConfiguration.js";
 import path from "path";
 import url from "url";
 import packageJson from "./package.json" assert { type: "json" };
@@ -26,7 +26,7 @@ export default {
     module: {
         rules: [
             {
-                test: /\.ts[x]$/,
+                test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "ts-loader",
@@ -57,18 +57,7 @@ export default {
     },
     plugins: [
         new ModuleFederationPlugin(
-            createRemoteConfiguration(
-                "remote1",
-                packageJson,
-                {
-                    sharedDependencies: {
-                        "wmfnext-shell": {
-                            singleton: true,
-                            requiredVersion: "0.0.1"
-                        }
-                    }
-                }
-            )
+            createModuleConfiguration("remote1", packageJson)
         )
     ]
 };

@@ -1,10 +1,10 @@
 import { useLogger, useSession } from "wmfnext-shell";
 
-import { AppSession } from "wmfnext-shared";
+import type { Session } from "wmfnext-shared";
 
 export default function Page5() {
     const logger = useLogger();
-    const session = useSession() as AppSession;
+    const session = useSession() as Session;
 
     logger.debug("Rendering \"page5\" from module \"remote1\"");
 

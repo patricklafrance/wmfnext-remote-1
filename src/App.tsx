@@ -1,5 +1,14 @@
+import { Loading, useAppRouter } from "wmfnext-shared";
+
+import { RouterProvider } from "react-router-dom";
+
 export function App() {
+    const router = useAppRouter();
+
     return (
-        <div>Hello from remote!</div>
+        <RouterProvider
+            router={router}
+            fallbackElement={<Loading />}
+        />
     );
 }

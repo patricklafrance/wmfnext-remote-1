@@ -1,15 +1,15 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
-import { createRemoteConfiguration } from "wmfnext-remote-loader/createModuleFederationConfiguration.js";
+// import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
+// import { createModuleConfiguration } from "wmfnext-shared/createModuleFederationConfiguration.js";
 import path from "path";
 import url from "url";
-import packageJson from "./package.json" assert { type: "json" };
+// import packageJson from "./package.json" assert { type: "json" };
 
 // "__dirname" is specific to CommonJS: https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const isLocalDevelopment = process.env.LOCAL === "true";
+const isLocal = process.env.LOCAL === "true";
 
 /** @type {import("webpack").Configuration} */
 export default {
@@ -24,7 +24,7 @@ export default {
             "Access-Control-Allow-Origin": "*"
         }
     },
-    entry: isLocalDevelopment ? "./src/index.ts" : "./src/register.tsx",
+    entry: isLocal ? "./src/index.tsx" : "./src/register.tsx",
     output: {
         // The trailing / is important otherwise hot reload doesn't work.
         publicPath: "http://localhost:8081/"
@@ -32,7 +32,7 @@ export default {
     module: {
         rules: [
             {
-                test: /\.ts[x]$/,
+                test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "ts-loader",
@@ -60,25 +60,21 @@ export default {
         ]
     },
     resolve: {
+        alias: {
+            // Without the aliases, at runtime an "Invalid hook call" is thrown, see https://stackoverflow.com/questions/64283813/invalid-hook-call-on-npm-link-library
+            react: path.resolve(__dirname, "./node_modules/react"),
+            "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+            // Without the alias, at runtime the index route doesn't render and we are stuck with a blank page.
+            "react-router-dom": path.resolve(__dirname, "./node_modules/react-router-dom")
+        },
         // Must add ".js" for files imported from node_modules.
         extensions: [".js", ".ts", ".tsx", ".css"]
     },
     plugins: [
-        new ModuleFederationPlugin(
-            createRemoteConfiguration(
-                "remote1",
-                packageJson,
-                {
-                    sharedDependencies: {
-                        "wmfnext-shell": {
-                            singleton: true,
-                            requiredVersion: "0.0.1"
-                        }
-                    }
-                }
-            )
-        ),
-        isLocalDevelopment && new HtmlWebpackPlugin({
+        // !isLocal && new ModuleFederationPlugin(
+        //     createModuleConfiguration("remote1", packageJson)
+        // ),
+        isLocal && new HtmlWebpackPlugin({
             template: "./public/index.html"
         })
     ].filter(Boolean)
