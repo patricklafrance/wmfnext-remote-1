@@ -20,6 +20,7 @@ export default {
     entry: "./src/register.tsx",
     output: {
         path: path.resolve(__dirname, "dist"),
+        // The trailing / is very important, otherwise paths will ne be resolved correctly.
         publicPath: "http://localhost:8081/",
         clean: true
     },
