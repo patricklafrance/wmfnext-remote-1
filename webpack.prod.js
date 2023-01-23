@@ -1,12 +1,10 @@
-import ModuleFederationPlugin from "webpack/lib/container/ModuleFederationPlugin.js";
-import { createModuleConfiguration } from "wmfnext-shared/createModuleFederationConfiguration.js";
+import { createModulePlugin } from "wmfnext-shared/webpack.js";
+import { getFileDirectory } from "wmfnext-remote-loader/webpack.js";
 import path from "path";
-import url from "url";
+
 import packageJson from "./package.json" assert { type: "json" };
 
-// "__dirname" is specific to CommonJS: https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = getFileDirectory(import.meta);
 
 /** @type {import("webpack").Configuration} */
 export default {
@@ -54,11 +52,16 @@ export default {
         ]
     },
     resolve: {
+        alias: {
+            // Without the aliases, at runtime an "Invalid hook call" is thrown, see https://stackoverflow.com/questions/64283813/invalid-hook-call-on-npm-link-library
+            "react": path.resolve(__dirname, "./node_modules/react"),
+            "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+            // Without the alias, at runtime the index route doesn't render and we are stuck with a blank page.
+            "react-router-dom": path.resolve(__dirname, "./node_modules/react-router-dom")
+        },
         extensions: [".js", ".ts", ".tsx", ".css"]
     },
     plugins: [
-        new ModuleFederationPlugin(
-            createModuleConfiguration("remote1", packageJson)
-        )
+        createModulePlugin("remote1", packageJson)
     ]
 };
