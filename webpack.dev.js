@@ -71,5 +71,5 @@ export default {
         isLocal
             ? new HtmlWebpackPlugin({ template: "./public/index.html" })
             : createModulePlugin("remote1", packageJson)
-    ].filter(Boolean)
+    ]
 };
