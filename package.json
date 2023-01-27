@@ -13,6 +13,7 @@
   "scripts": {
     "prebuild": "yarn clean",
     "build": "webpack --config webpack.prod.js",
+    "build-local": "cross-env LOCAL=true webpack --config webpack.prod.js",
     "clean": "run-p --continue-on-error delete-dist delete-ts-cache",
     "dev": "webpack serve --config webpack.dev.js",
     "dev-local": "cross-env LOCAL=true webpack serve --config webpack.dev.js",
@@ -24,14 +25,11 @@
     "eslint-fix": "eslint --ext .js,.ts . --fix",
     "lint": "eslint && check-types",
     "link-pkg": "yarn link-pkg:shell && yarn link-pkg:remote-loader && yarn link-pkg:shared",
-    "link-pkg:shell": "yarn link wmfnext-shell",
-    "link-pkg:remote-loader": "yarn link wmfnext-remote-loader",
-    "link-pkg:shared": "yarn link wmfnext-shared",
-    "preinstall": "yarn link-pkg",
-    "release": "",
-    "reset": "run-s -c clean delete-node-modules delete-yarn-lock",
-    "serve-build": "run-s build serve-build:start-server",
-    "serve-build:start-server": "yarn http-server dist -p 8081 -P http://localhost:8081?"
+    "preinstall-dev": "yarn link-pkg",
+    "install-dev": "yarn install",
+    "reset": "run-s --continue-on-error clean delete-node-modules delete-yarn-lock",
+    "serve-build": "yarn http-server dist -p 8081 -P http://localhost:8081?",
+    "build-netlify": "cross-env NETLIFY=true yarn install && yarn build"
   },
   "devDependencies": {
     "@sharegate/eslint-config-react": "5.0.1",
@@ -47,9 +45,6 @@
     "html-webpack-plugin": "5.5.0",
     "http-server": "14.1.1",
     "npm-run-all": "4.1.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-router-dom": "6.4.5",
     "rimraf": "3.0.2",
     "style-loader": "3.3.1",
     "ts-loader": "9.4.2",
@@ -57,5 +52,13 @@
     "webpack": "5.75.0",
     "webpack-cli": "5.0.1",
     "webpack-dev-server": "4.11.1"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.4.5",
+    "wmfnext-shell": "0.1.1",
+    "wmfnext-remote-loader": "0.1.4",
+    "wmfnext-shared": "0.1.0"
   }
 }
