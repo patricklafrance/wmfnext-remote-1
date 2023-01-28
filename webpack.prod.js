@@ -22,7 +22,7 @@ export default {
     output: {
         path: path.resolve(__dirname, "dist"),
         // The trailing / is very important, otherwise paths will ne be resolved correctly.
-        publicPath: isNetlify ? "https://wmfnext-remote-1.netlify.app" : "http://localhost:8081/",
+        publicPath: isNetlify ? "https://wmfnext-remote-1.netlify.app/" : "http://localhost:8081/",
         clean: true
     },
     module: {
