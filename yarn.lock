@@ -4228,6 +4228,13 @@ wmfnext-remote-loader@0.1.4:
   dependencies:
     wmfnext-shell "0.1.1"
 
+wmfnext-remote-loader@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/wmfnext-remote-loader/-/wmfnext-remote-loader-0.2.0.tgz#133aadf0b8570f0e95603fadb155bf73a7b77dc2"
+  integrity sha512-DxMHSCcvqcmYa3HjwFHRh++6uRH/t7ff6Nr2xhqy4UIyMoUlZGiXf4vPNJ3FO9hTHm2wXYeJ6NFNGhuCYopeFg==
+  dependencies:
+    wmfnext-shell "0.1.1"
+
 wmfnext-shared@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/wmfnext-shared/-/wmfnext-shared-0.1.0.tgz#07bd9eba14e951b5dc8a4da92ff96d9d72ce66ca"
